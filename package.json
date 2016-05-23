@@ -37,6 +37,7 @@
     "test": "grunt test"
   },
   "dependencies": {
+    "grunt-contrib-jade": "^1.0.0",
     "jit-grunt": "^0.10.0"
   }
 }
