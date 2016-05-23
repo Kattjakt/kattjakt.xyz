@@ -9,7 +9,6 @@ angular.module('kattjakt', [
     'ngTouch'
   ])
   .config(function ($routeProvider) {
-    console.log('hello from app.js');
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
