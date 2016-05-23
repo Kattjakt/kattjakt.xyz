@@ -9,13 +9,10 @@ html
     link(rel="stylesheet" href="styles/main.css")
     // endbuild 
   
-  body(ng-app="kattjaktxyzApp")
-    header h
+  body(ng-app="kattjakt")
+    legend
 
-    div(class="container")
     div(ng-view="")
-
-    footer f
     
     script.
       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
@@ -42,4 +39,5 @@ html
     script(src="scripts/app.js")
     script(src="scripts/controllers/main.js")
     script(src="scripts/controllers/about.js")
+    script(src="scripts/directives/header.js")
     // endbuild

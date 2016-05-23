@@ -1,15 +1,6 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name kattjaktxyzApp
- * @description
- * # kattjaktxyzApp
- *
- * Main module of the application.
- */
-angular
-  .module('kattjaktxyzApp', [
+angular.module('kattjakt', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -18,16 +9,15 @@ angular
     'ngTouch'
   ])
   .config(function ($routeProvider) {
+    console.log('hello from app.js');
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        controller: 'main'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
+        controller: 'about'
       })
       .otherwise({
         redirectTo: '/'
