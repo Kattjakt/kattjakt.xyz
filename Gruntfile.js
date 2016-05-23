@@ -1,4 +1,4 @@
-// Generated on 2016-05-23 using generator-angular 0.15.1
+// Generated on 2016-02-29 using generator-angular 0.15.1
 'use strict';
 
 // # Globbing
@@ -33,6 +33,10 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
+      jade: {
+        files: ['<%= yeoman.app %>/{,*/}*.jade'],
+        tasks: ['jade']
+      },
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
@@ -60,7 +64,7 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '<%= yeoman.app %>/{,*/}*.html',
+          '<%= yeoman.app %>/{,*/}*.jade',
           '.tmp/styles/{,*/}*.css',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
@@ -72,7 +76,8 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        // hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
       livereload: {
@@ -201,7 +206,10 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the app
     wiredep: {
       app: {
-        src: ['<%= yeoman.app %>/index.html'],
+        src: [
+          '<%= yeoman.app %>/index.html',
+          '<%= yeoman.app %>/index.jade'
+        ],
         ignorePath:  /\.\.\//
       },
       test: {
@@ -224,7 +232,7 @@ module.exports = function (grunt) {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
       }
-    }, 
+    },
 
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
@@ -371,7 +379,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       dist: {
         options: {
-          module: 'kattjaktxyzApp',
+          module: 'bazaarApp',
           htmlmin: '<%= htmlmin.dist.options %>',
           usemin: 'scripts/scripts.js'
         },
@@ -451,7 +459,35 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    jade: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '.tmp/',
+          src: ['**/*.jade'], // Actual pattern(s) to match.
+          dest: '<%= yeoman.dist %>'
+        }]
+      },
+      // Compile .jade files in app/views/ to .tmp/
+      compile: {
+        options: {
+          pretty: true,
+          data: {
+            debug: false
+          }
+        },
+        files: [{
+          expand: true, // Enable dynamic expansion.
+          cwd: '<%= yeoman.app %>', // Src matches are relative to this path.
+          src: '{,*/}*.jade', // Actual pattern(s) to match.
+          dest: '.tmp/', // Destination path prefix.
+          ext: '.html' // Dest filepaths will have this extension.
+        }]
+      }
     }
+
   });
 
 
@@ -464,6 +500,7 @@ module.exports = function (grunt) {
       'clean:server',
       'wiredep',
       'concurrent:server',
+      'jade',
       'postcss:server',
       'connect:livereload',
       'watch'
@@ -490,6 +527,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'postcss',
+    'jade',
     'ngtemplates',
     'concat',
     'ngAnnotate',
